@@ -1,0 +1,219 @@
+{
+  "contractName": "Test",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "testCreateToken",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x60606040523415600e57600080fd5b60848061001c6000396000f300606060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063459a585a146044575b600080fd5b3415604e57600080fd5b60546056565b005b5600a165627a7a723058206f5de87813508d3a4393fbb62142a36d7fb35abd204d81f3a9c859f8939e96d10029",
+  "deployedBytecode": "0x606060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063459a585a146044575b600080fd5b3415604e57600080fd5b60546056565b005b5600a165627a7a723058206f5de87813508d3a4393fbb62142a36d7fb35abd204d81f3a9c859f8939e96d10029",
+  "sourceMap": "159:122:2:-;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "159:122:2:-;;;;;;;;;;;;;;;;;;;;;;;;177:102;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.18;\n\n//import \"truffle/Assert.sol\";\n//import \"truffle/DeployedAddresses.sol\";\nimport \"./BaseContract.sol\";\nimport \"./BaseOwnership.sol\";\n\ncontract Test {\n  function testCreateToken(){\n    //BaseContract test = BaseContract();\n    //test._generateToken();\n  }\n}\n",
+  "sourcePath": "/Users/kevinle/Documents/GitHub/Pegacat/src/contracts/Test.sol",
+  "ast": {
+    "absolutePath": "/Users/kevinle/Documents/GitHub/Pegacat/src/contracts/Test.sol",
+    "exportedSymbols": {
+      "Test": [
+        251
+      ]
+    },
+    "id": 252,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 244,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".18"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:2"
+      },
+      {
+        "absolutePath": "/Users/kevinle/Documents/GitHub/Pegacat/src/contracts/BaseContract.sol",
+        "file": "./BaseContract.sol",
+        "id": 245,
+        "nodeType": "ImportDirective",
+        "scope": 252,
+        "sourceUnit": 107,
+        "src": "99:28:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/kevinle/Documents/GitHub/Pegacat/src/contracts/BaseOwnership.sol",
+        "file": "./BaseOwnership.sol",
+        "id": 246,
+        "nodeType": "ImportDirective",
+        "scope": 252,
+        "sourceUnit": 243,
+        "src": "128:29:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 251,
+        "linearizedBaseContracts": [
+          251
+        ],
+        "name": "Test",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 249,
+              "nodeType": "Block",
+              "src": "203:76:2",
+              "statements": []
+            },
+            "id": 250,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "testCreateToken",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 247,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "201:2:2"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 248,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "203:0:2"
+            },
+            "scope": 251,
+            "src": "177:102:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 252,
+        "src": "159:122:2"
+      }
+    ],
+    "src": "0:282:2"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/kevinle/Documents/GitHub/Pegacat/src/contracts/Test.sol",
+    "exportedSymbols": {
+      "Test": [
+        251
+      ]
+    },
+    "id": 252,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 244,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".18"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:2"
+      },
+      {
+        "absolutePath": "/Users/kevinle/Documents/GitHub/Pegacat/src/contracts/BaseContract.sol",
+        "file": "./BaseContract.sol",
+        "id": 245,
+        "nodeType": "ImportDirective",
+        "scope": 252,
+        "sourceUnit": 107,
+        "src": "99:28:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/kevinle/Documents/GitHub/Pegacat/src/contracts/BaseOwnership.sol",
+        "file": "./BaseOwnership.sol",
+        "id": 246,
+        "nodeType": "ImportDirective",
+        "scope": 252,
+        "sourceUnit": 243,
+        "src": "128:29:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 251,
+        "linearizedBaseContracts": [
+          251
+        ],
+        "name": "Test",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 249,
+              "nodeType": "Block",
+              "src": "203:76:2",
+              "statements": []
+            },
+            "id": 250,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "testCreateToken",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 247,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "201:2:2"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 248,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "203:0:2"
+            },
+            "scope": 251,
+            "src": "177:102:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 252,
+        "src": "159:122:2"
+      }
+    ],
+    "src": "0:282:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.19+commit.c4cbbb05.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.0",
+  "updatedAt": "2018-03-27T02:25:58.336Z"
+}
