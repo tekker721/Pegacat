@@ -9,6 +9,8 @@ import "./BaseContract.sol";
 /// lastmod 26/3/18
 contract BaseOwnership is BaseContract, ERC721 {
 
+  mapping (uint => address) tokenApprovals;
+
   /// @dev Returns the number of tokens owned by the given ownerId
   function balanceOf(address _owner) public view returns (uint count) {
     return ownerTokenCount[_owner];
@@ -48,6 +50,12 @@ contract BaseOwnership is BaseContract, ERC721 {
 
   } */
 
+  /// @dev transfers a token to an approved recipient
+  function takeOwnership(uint256 _tokenId) public {
+    require(tokenApprovals[_tokenId] == msg.sender);
+    address owner = ownerOf(_tokenId);
+    _transfer(owner, msg.sender, _tokenId);
+  }
 
   /// @dev returns the total count of all tokens
   function totalSupply() public view returns(uint) {
