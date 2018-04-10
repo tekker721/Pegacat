@@ -3,7 +3,10 @@ pragma solidity ^0.4.18;
 /// @title Base contract that holds all common structs, events and base variables.
 /// @author Alex Koller & Kevin Le
 /// lastmod 26/3/18
-contract BaseContract  {
+
+import "./Ownable.sol";
+
+contract BaseContract is Ownable {
 
   /// @dev Event that is triggered each time the ownership of a token changes
   event Transfer(address from, address to, uint256 tokenId);
