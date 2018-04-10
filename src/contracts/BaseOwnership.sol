@@ -52,7 +52,7 @@ contract BaseOwnership is BaseContract, ERC721 {
 
   } */
 
-  /// @dev transfers a token to an approvedf
+  /// @dev transfers a token to an approved address
   function takeOwnership(uint256 _tokenId) public {
     require(tokenApprovals[_tokenId] == msg.sender);
     address owner = ownerOf(_tokenId);
