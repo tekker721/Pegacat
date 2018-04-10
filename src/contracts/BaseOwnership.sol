@@ -32,10 +32,12 @@ contract BaseOwnership is BaseContract, ERC721 {
   }
 
 
-  //approve - to be implemented later
-  /* function approve() internal {
 
-  } */
+  /// @dev approves an address for the specified token to be sent to
+  function approve(address _to, uint256 _tokenId) public onlyOwnerOf(_tokenId) {
+    tokenApprovals[_tokenId] = _to;
+    Approval(msg.sender, _to, _tokenId);
+  }
 
   /* /// @dev transferfrom - logic to be checked
   function transferFrom(address _from, address _to, uint _tokenId) external {
@@ -50,7 +52,7 @@ contract BaseOwnership is BaseContract, ERC721 {
 
   } */
 
-  /// @dev transfers a token to an approved recipient
+  /// @dev transfers a token to an approvedf
   function takeOwnership(uint256 _tokenId) public {
     require(tokenApprovals[_tokenId] == msg.sender);
     address owner = ownerOf(_tokenId);
