@@ -43,14 +43,14 @@
       "type": "event"
     }
   ],
-  "bytecode": "0x6060604052341561000f57600080fd5b6101038061001e6000396000f300606060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630583e9f8146044575b600080fd5b3415604e57600080fd5b6062600480803590602001909190505060a4565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60016020528060005260406000206000915054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a72305820df069985d387ca319e214ef6d0de5be7ec229f9187ea131e81f7f09bc3c268120029",
-  "deployedBytecode": "0x606060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630583e9f8146044575b600080fd5b3415604e57600080fd5b6062600480803590602001909190505060a4565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60016020528060005260406000206000915054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a72305820df069985d387ca319e214ef6d0de5be7ec229f9187ea131e81f7f09bc3c268120029",
-  "sourceMap": "164:2361:0:-;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "164:2361:0:-;;;;;;;;;;;;;;;;;;;;;;;;777:46;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
-  "source": "pragma solidity ^0.4.18;\n\n/// @title Base contract that holds all common structs, events and base variables.\n/// @author Alex Koller & Kevin Le\n/// lastmod 26/3/18\ncontract BaseContract  {\n\n  /// @dev Event that is triggered each time the ownership of a token changes\n  event Transfer(address from, address to, uint256 tokenId);\n\n  // @dev General blank struct for basic token. Currently has no other necessary data\n  struct BaseToken {\n    uint256 id;\n  }\n\n  /// @dev An array to store all tokens that exist (have been minted). The array\n  /// is made up of BaseToken structs\n  BaseToken[] tokens;\n\n  /// @dev Maps the index of a token in the array to the address of the owner\n  /// All tokens have an owner, even if it is a O address\n  /// TODO: refactor to better naming?\n  mapping (uint256 => address) public tokenIndex;\n\n  /// @dev Mapping an address to the number of tokens owned by the address\n  mapping (address => uint256) ownerTokenCount;\n\n  /// TODO: implment the rest of the ERC721 functions to be compliant\n  /// especially understand approval()\n\n  /// @dev This function transfers the ownership of a given token to a new address\n  /// Note: this is the internal function\n  /// @param _from are valid addresses\n  /// @param _to are valid addresses\n  /// @param _tokenId is a valid, exisiting token\n  function _transfer(address _from, address _to, uint256 _tokenId) internal {\n    /// update count of new owners tokens\n    ownerTokenCount[_to]++;\n    /// update owner of token in mapping\n    tokenIndex[_tokenId] = _to;\n\n    /// if this is not a new token (ie address is not 0)\n    if (_from != address(0)){\n      /// decrease the count of tokens the old owner has\n      ownerTokenCount[_from]--;\n    }\n    ///depreciation\n    /// trigger the transfer event\n    Transfer(_from, _to, _tokenId);\n  }\n\n  /// @dev This function generates a new token and stores is\n  /// @param _id is a unique token id\n  /// @param _owner is a valid address\n  function _generateToken(uint256 _id, address _owner) internal returns (uint) {\n    /// create token\n    BaseToken memory _tempToken = BaseToken({ id: _id });\n    /// add the token to the array of all tokens\n    uint256 tempTokenIndex = tokens.push(_tempToken) -1;\n    /// ensuring there is no overflow\n    require(tempTokenIndex == uint256(uint32(tempTokenIndex)));\n    /// transfer the owner of the token from a 0 address to given addresses\n    _transfer(0, _owner, tempTokenIndex);\n    /// return the index of the token in the tokens array\n    return tempTokenIndex;\n  }\n}\n",
-  "sourcePath": "/Users/alexkoller/GitHub/Pegacat/src/contracts/BaseContract.sol",
+  "bytecode": "0x6060604052341561000f57600080fd5b6101038061001e6000396000f300606060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630583e9f8146044575b600080fd5b3415604e57600080fd5b6062600480803590602001909190505060a4565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60016020528060005260406000206000915054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a72305820effc6ee36bb12fb16d13d89b06f044b538505ea90e2e5e1a9d346c8608b6c4490029",
+  "deployedBytecode": "0x606060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630583e9f8146044575b600080fd5b3415604e57600080fd5b6062600480803590602001909190505060a4565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60016020528060005260406000206000915054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a72305820effc6ee36bb12fb16d13d89b06f044b538505ea90e2e5e1a9d346c8608b6c4490029",
+  "sourceMap": "165:2361:0:-;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "165:2361:0:-;;;;;;;;;;;;;;;;;;;;;;;;777:46;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.18;\n\n/// @title Base contract that holds all common structs, events and base variables.\n/// @author Alex Koller & Kevin Le\n/// lastmod 26/3/18\n\ncontract BaseContract {\n\n  /// @dev Event that is triggered each time the ownership of a token changes\n  event Transfer(address from, address to, uint256 tokenId);\n\n  // @dev General blank struct for basic token. Currently has no other necessary data\n  struct BaseToken {\n    uint256 id;\n  }\n\n  /// @dev An array to store all tokens that exist (have been minted). The array\n  /// is made up of BaseToken structs\n  BaseToken[] tokens;\n\n  /// @dev Maps the index of a token in the array to the address of the owner\n  /// All tokens have an owner, even if it is a O address\n  /// TODO: refactor to better naming?\n  mapping (uint256 => address) public tokenIndex;\n\n  /// @dev Mapping an address to the number of tokens owned by the address\n  mapping (address => uint256) ownerTokenCount;\n\n  /// TODO: implment the rest of the ERC721 functions to be compliant\n  /// especially understand approval()\n\n  /// @dev This function transfers the ownership of a given token to a new address\n  /// Note: this is the internal function\n  /// @param _from are valid addresses\n  /// @param _to are valid addresses\n  /// @param _tokenId is a valid, exisiting token\n  function _transfer(address _from, address _to, uint256 _tokenId) internal {\n    /// update count of new owners tokens\n    ownerTokenCount[_to]++;\n    /// update owner of token in mapping\n    tokenIndex[_tokenId] = _to;\n\n    /// if this is not a new token (ie address is not 0)\n    if (_from != address(0)){\n      /// decrease the count of tokens the old owner has\n      ownerTokenCount[_from]--;\n    }\n    ///depreciation\n    /// trigger the transfer event\n    Transfer(_from, _to, _tokenId);\n  }\n\n  /// @dev This function generates a new token and stores is\n  /// @param _id is a unique token id\n  /// @param _owner is a valid address\n  function _generateToken(uint256 _id, address _owner) internal returns (uint) {\n    /// create token\n    BaseToken memory _tempToken = BaseToken({ id: _id });\n    /// add the token to the array of all tokens\n    uint256 tempTokenIndex = tokens.push(_tempToken) -1;\n    /// ensuring there is no overflow\n    require(tempTokenIndex == uint256(uint32(tempTokenIndex)));\n    /// transfer the owner of the token from a 0 address to given addresses\n    _transfer(0, _owner, tempTokenIndex);\n    /// return the index of the token in the tokens array\n    return tempTokenIndex;\n  }\n\n}\n",
+  "sourcePath": "/Users/niaz/Documents/Pegacats Resources/Pegacat/src/contracts/BaseContract.sol",
   "ast": {
-    "absolutePath": "/Users/alexkoller/GitHub/Pegacat/src/contracts/BaseContract.sol",
+    "absolutePath": "/Users/niaz/Documents/Pegacats Resources/Pegacat/src/contracts/BaseContract.sol",
     "exportedSymbols": {
       "BaseContract": [
         106
@@ -1205,7 +1205,7 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 296,
+                      "referencedDeclaration": 437,
                       "src": "2257:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1452,13 +1452,13 @@
           }
         ],
         "scope": 107,
-        "src": "164:2361:0"
+        "src": "165:2361:0"
       }
     ],
-    "src": "0:2526:0"
+    "src": "0:2527:0"
   },
   "legacyAST": {
-    "absolutePath": "/Users/alexkoller/GitHub/Pegacat/src/contracts/BaseContract.sol",
+    "absolutePath": "/Users/niaz/Documents/Pegacats Resources/Pegacat/src/contracts/BaseContract.sol",
     "exportedSymbols": {
       "BaseContract": [
         106
@@ -2613,7 +2613,7 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 296,
+                      "referencedDeclaration": 437,
                       "src": "2257:7:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2860,10 +2860,10 @@
           }
         ],
         "scope": 107,
-        "src": "164:2361:0"
+        "src": "165:2361:0"
       }
     ],
-    "src": "0:2526:0"
+    "src": "0:2527:0"
   },
   "compiler": {
     "name": "solc",
@@ -2878,5 +2878,5 @@
     }
   },
   "schemaVersion": "2.0.0",
-  "updatedAt": "2018-03-27T11:57:13.801Z"
+  "updatedAt": "2018-04-23T06:55:42.720Z"
 }

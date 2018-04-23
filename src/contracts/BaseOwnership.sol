@@ -3,10 +3,12 @@ pragma solidity ^0.4.18;
 import "../node_modules/zeppelin-solidity/contracts/token/ERC721/ERC721.sol";
 import "./BaseContract.sol";
 
+
 /// @title Ownership contract that deals with all of the ownership related
 /// functionality of a token
 /// @author Alex Koller & Kevin Le
-/// lastmod 26/3/18
+/// lastmod 12/4/18 Niaz added onlyOwnerOf modifier
+
 contract BaseOwnership is BaseContract, ERC721 {
 
   mapping (uint => address) tokenApprovals;
@@ -69,5 +71,14 @@ contract BaseOwnership is BaseContract, ERC721 {
     address owner = tokenIndex[_tokenId];
     require(owner != address(0));
     return owner;
+  }
+
+  /**
+  * @dev Guarantees msg.sender is owner of the given token
+  * @param _tokenId uint256 ID of the token to validate its ownership belongs to msg.sender
+  */
+  modifier onlyOwnerOf(uint256 _tokenId) {
+    require(ownerOf(_tokenId) == msg.sender);
+    _;
   }
 }
