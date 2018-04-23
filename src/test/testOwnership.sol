@@ -9,7 +9,7 @@ import "../contracts/TokenMinting.sol";
 //@dev testing the functions in BaseOwnership.sol
 //@pre TokenMinting.sol works and all the test cases in testCreate.sol pass
 //@author Patrick Guo & Niaz Makhdum
-contract TestOwnership {
+contract testOwnership {
   TokenMinting tokens = TokenMinting(DeployedAddresses.TokenMinting());
   //BaseOwnership base = BaseOwnership(DeployedAddresses.BaseOwnership());
   address owner = msg.sender;
