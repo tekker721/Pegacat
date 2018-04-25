@@ -26,6 +26,11 @@ contract BaseContract {
   /// @dev Mapping an address to the number of tokens owned by the address
   mapping (address => uint256) ownerTokenCount;
 
+  /// @dev Mapping tokenid to an address that is approved to transfer the token
+  /// @dev Each token can only have one address in this Mapping
+  /// @dev If there is no tokenid mapping, there is no approval for transfer
+  mapping (uint => address) tokenApprovals;
+
   /// TODO: implment the rest of the ERC721 functions to be compliant
   /// especially understand approval()
 
