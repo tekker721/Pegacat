@@ -65,7 +65,7 @@ contract BaseOwnership is BaseContract, ERC721 {
 
   /// @dev returns the total count of all tokens
   function totalSupply() public view returns(uint) {
-    return tokens.length-1;
+    return tokens.length-1;//bugged, should probably just be tokens.length
   }
 
   /// @dev returns the owner of a given token id
