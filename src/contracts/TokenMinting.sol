@@ -23,23 +23,5 @@ contract TokenMinting is BaseOwnership {
   }
 
 
-  /// @dev purchase a token and transfer it to the purchaser
-  function purchaseToken(uint256 tokenId) public payable {
 
-    address owner = tokenIndex[tokenId];
-    require(owner != msg.sender); //require that the owner is not the buyer
-    require(msg.sender != address(0));
-    require(msg.value == price);
-
-    owner.transfer(price);
-/*
-    if (owner == address(this)){//if the owner of the token is this contract address
-        ceoAddress.transfer(price);
-    } else {//otherwise transfer the ether to the owner of the token
-      owner.transfer(price);
-    }
-*/
-    _approve(msg.sender, tokenId);
-
-  }
 }
