@@ -1,13 +1,13 @@
 pragma solidity ^0.4.18;
 
-import "./TokenMinting";
+import "./BaseOwnership.sol";
 
 /// @title Basic marketplace logic
 /// to be expanded on
 /// @author Patrick Guo
 /// lastmod 22/6/18
 
-contract TokenSales is TokenMinting {
+contract TokenSales is BaseOwnership {
 
   struct Sale {
     //have a unique sale id? gets rid of same token problem
@@ -28,7 +28,7 @@ contract TokenSales is TokenMinting {
 */
 
   /// @dev Creates a sale
-  function createSale(uint256 tokenId, uint256 price) public onlyOwnerOf {
+  function createSale(uint256 tokenId, uint256 price) public onlyOwnerOf(tokenId) {
     Sale memory sale = Sale(msg.sender, tokenId, price);//Create sale struct
     tokenIdToSale[tokenId] = sale;//create a new mapping
     _approve(this, tokenId);//approves this contract to take ownership of the token
@@ -36,12 +36,12 @@ contract TokenSales is TokenMinting {
   }
 
   /// @dev Remove a sale
-  function cancelSale(uint256 tokenId) public onlyOwnerOf {
+  function cancelSale(uint256 tokenId) public {
     Sale sale = tokenIdToSale[tokenId];
     require(sale.seller == msg.sender);//check that the seller listed is the actual seller
     delete(tokenIdToSale[tokenId]);//remove sale from mapping
-    approve(msg.sender, tokenId);//approves the token to be sent back to seller
-    transfer(msg.sender, tokenId);//token is transferred back to seller
+    _approve(msg.sender, tokenId);//approves the token to be sent back to seller
+    _transfer(this, msg.sender, tokenId);//token is transferred back to seller
   }
 
   /// @dev Escrows the token, assigning ownership to this contract.
@@ -50,7 +50,8 @@ contract TokenSales is TokenMinting {
   /// @param _tokenId - ID of token whose approval to verify.
   function _escrow(address _owner, uint256 _tokenId) internal {
       // it will throw if transfer fails
-      transferFrom(_owner, this, _tokenId);
+      /* transferFrom(_owner, this, _tokenId); */
+      takeOwnership(_tokenId);
   }
 
   /// @dev purchase a token and transfer it to the purchaser
@@ -64,7 +65,7 @@ contract TokenSales is TokenMinting {
     uint256 finalSaleValue = sale.price - cut;
     seller.transfer(finalSaleValue); //transfers the ether to the owner after house cut
     _approve(msg.sender, tokenId); //approves the token to be sent to the buyer
-    transfer(msg.sender, tokenId); //send token to buyer
+    _transfer(this, msg.sender, tokenId); //send token to buyer
     delete(tokenIdToSale[tokenId]);//remove sale from mapping
   }
 
